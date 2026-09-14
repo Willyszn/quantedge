@@ -1,0 +1,142 @@
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/500.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "@fontsource/manrope/800.css";
+@import "@fontsource/ibm-plex-mono/500.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * QUANTEDGE design tokens.
+ *
+ * Every color in tailwind.config.js reads from one of these CSS variables,
+ * expressed as space-separated RGB triples so Tailwind's `rgb(var(--x) /
+ * <alpha-value>)` pattern can still apply opacity modifiers (e.g. bg-ink/40).
+ *
+ * Light mode is the default, shipped experience — the `.dark` block only
+ * takes effect once a person explicitly opts in via the theme toggle (see
+ * src/store/themeStore.ts). Component code never references these variables
+ * directly; it uses the semantic Tailwind classes (bg-canvas, text-ink,
+ * border-line, bg-primary, ...), so this file is the only place a future
+ * theme needs to change.
+ */
+@layer base {
+  :root {
+    --color-canvas: 255 255 255;
+    --color-surface: 248 249 250;
+    --color-surface-subtle: 244 245 247;
+
+    --color-ink: 17 19 24;
+    --color-ink-secondary: 102 112 133;
+    --color-ink-faint: 152 162 179;
+
+    --color-line: 230 232 236;
+    --color-line-strong: 208 213 221;
+
+    --color-positive: 22 132 91;
+    --color-positive-soft: 231 245 239;
+    --color-negative: 214 69 69;
+    --color-negative-soft: 251 234 234;
+    --color-warning: 183 121 31;
+    --color-warning-soft: 251 242 227;
+    --color-info: 53 106 230;
+    --color-info-soft: 235 241 253;
+
+    /* Solid-fill pair used for primary buttons, active nav items, solid
+       badges, and the tooltip bubble. Co-varies with theme so contrast is
+       always correct: near-black fill with white text in light mode,
+       near-white fill with near-black text in dark mode. */
+    --color-primary: 17 19 24;
+    --color-primary-foreground: 255 255 255;
+  }
+
+  .dark {
+    --color-canvas: 10 11 13;
+    --color-surface: 18 20 23;
+    --color-surface-subtle: 24 27 31;
+
+    --color-ink: 237 238 240;
+    --color-ink-secondary: 148 157 171;
+    --color-ink-faint: 100 108 122;
+
+    --color-line: 40 44 50;
+    --color-line-strong: 56 61 69;
+
+    --color-positive: 48 164 108;
+    --color-positive-soft: 15 42 32;
+    --color-negative: 229 72 77;
+    --color-negative-soft: 46 21 22;
+    --color-warning: 224 168 62;
+    --color-warning-soft: 45 35 18;
+    --color-info: 94 151 246;
+    --color-info-soft: 20 33 56;
+
+    --color-primary: 237 238 240;
+    --color-primary-foreground: 10 11 13;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-primary));
+    color: rgb(var(--color-primary-foreground));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-primary));
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      rgb(var(--color-surface-subtle)) 25%,
+      rgb(var(--color-line)) 37%,
+      rgb(var(--color-surface-subtle)) 63%
+    );
+    background-size: 800px 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
