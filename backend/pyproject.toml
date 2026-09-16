@@ -1,0 +1,32 @@
+[project]
+name = "quantedge-backend"
+version = "0.1.0"
+description = "QUANTEDGE production backend — market data, quant analysis, sentiment, signals, risk, backtesting, and performance engines."
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 115
+target-version = "py311"
+exclude = [".venv", "alembic/versions"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["B008"]
+
+[tool.mypy]
+python_version = "3.11"
+plugins = ["pydantic.mypy"]
+ignore_missing_imports = true
+disallow_untyped_defs = false
+warn_unused_ignores = true
+exclude = ["alembic/versions", ".venv"]
+
+[tool.pydantic-mypy]
+init_forbid_extra = false
+init_typed = true
+warn_required_dynamic_aliases = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]

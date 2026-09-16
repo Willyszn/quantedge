@@ -1,0 +1,21 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+.env
+.env.*
+!.env.example
+
+*.log
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Alembic autogenerates into versions/ — keep migration history, ignore
+# any local scratch db files.
+*.sqlite3
+*.db
