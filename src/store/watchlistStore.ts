@@ -16,11 +16,7 @@ interface WatchlistState {
 export const useWatchlistStore = create<WatchlistState>()(
   persist(
     (set, get) => ({
-      items: [
-        { symbol: "XAUUSD", addedAt: new Date().toISOString() },
-        { symbol: "GBPUSD", addedAt: new Date().toISOString() },
-        { symbol: "BTCUSD", addedAt: new Date().toISOString() },
-      ],
+      items: [],
       add: (symbol) =>
         set((state) => {
           if (state.items.some((i) => i.symbol === symbol)) return state;
